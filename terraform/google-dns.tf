@@ -20,7 +20,7 @@ resource "google_dns_managed_zone" "voidlinux-org" {
 # should be its VMs.                                                 #
 ######################################################################
 
-resource "google_dns_record_set" "a-lej-de" {
+resource "google_dns_record_set" "a-lej-de-ipv4" {
   name = "a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
 
@@ -29,11 +29,29 @@ resource "google_dns_record_set" "a-lej-de" {
   rrdatas = ["136.243.133.13"]
 }
 
-resource "google_dns_record_set" "vm1-a-lej-de" {
+resource "google_dns_record_set" "a-lej-de-ipv6" {
+  name = "a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "AAAA"
+  ttl     = 300
+  rrdatas = ["2a01:4f8:212:34cc::2"]
+}
+
+resource "google_dns_record_set" "vm1-a-lej-de-ipv4" {
   name = "vm1.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
 
   type    = "A"
+  ttl     = 300
+  rrdatas = ["148.251.199.112"]
+}
+
+resource "google_dns_record_set" "vm1-a-lej-de-ipv6" {
+  name = "vm1.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "AAAA"
   ttl     = 300
   rrdatas = ["148.251.199.112"]
 }
